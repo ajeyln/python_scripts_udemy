@@ -24,7 +24,7 @@ vocabulary = { "QUIT":   "Q",
                 "SOUTH": "S",
                 "EAST":  "E",
                 "WEST": "W"}
-#rint(location[0].split())
+#print(location[0].split())
 # print(location[3],split(","))
 # print(" ".join(location[0].split()))
 loc = 1
