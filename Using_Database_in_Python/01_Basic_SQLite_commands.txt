@@ -1,0 +1,87 @@
+creating db file
+
+C:\Users\Ajey>sqlite3 test.db
+SQLite version 3.33.0 2020-08-14 13:23:32
+Enter ".help" for usage hints.
+sqlite> .headers on
+
+creating a table with colums (name , phonenumber, email)
+
+sqlite> create table contacts (name text, phone integer, email text);
+
+inserting the values to the table
+
+sqlite> insert into contacts values ('Ajey',123,'a@email.com');
+sqlite> insert into contacts(name,phone,email) values ('ramanath',456,'r@email.
+om');
+
+checking whether the datas are updated on that table or not
+sqlite> select * from contacts;
+name|phone|email
+Ajey|123|a@email.com
+ramanath|456|r@email.com
+sqlite> select name from contacts;
+name
+Ajey
+ramanath
+sqlite> select name,phone from contacts;
+name|phone
+Ajey|123
+ramanath|456
+
+Inserting values by column name method
+sqlite> insert into contact(name,email) values('radha','rd@email.com');
+sqlite> select * from contact;
+name|phone|email
+Ajey|123|a@email.com
+ramanth|456|r@email.com
+radha||rd@email.com
+
+How to take backup
+sqlite> .backup testbackup
+
+Updating value to column name
+
+sqlite> update contact set phone=789;
+sqlite> select * from contact;
+name|phone|email
+Ajey|789|a@email.com
+ramanth|789|r@email.com
+radha|789|rd@email.com
+
+How to restore the backup file
+sqlite> .restore testbackup
+sqlite> select * from contact;
+name|phone|email
+Ajey|123|a@email.com
+ramanth|456|r@email.com
+radha||rd@email.com
+sqlite> update contact set phone=789 where name='radha';
+sqlite> select * from contact;
+name|phone|email
+Ajey|123|a@email.com
+ramanth|456|r@email.com
+radha|789|rd@email.com
+
+Getting the data in customized method using where.
+sqlite> select name,email from contact where phone=456;
+name|email
+ramanth|r@email.com
+
+to find the table name currently using.
+sqlite> .tables
+contact
+
+fo find the created table.
+sqlite> .schema
+CREATE TABLE contact(name text, phone integer, email text);
+
+fo find created table and inserted data
+sqlite> .dump
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE contact(name text, phone integer, email text);
+INSERT INTO contact VALUES('Ajey',123,'a@email.com');
+INSERT INTO contact VALUES('ramanth',456,'r@email.com');
+INSERT INTO contact VALUES('radha',789,'rd@email.com');
+COMMIT;

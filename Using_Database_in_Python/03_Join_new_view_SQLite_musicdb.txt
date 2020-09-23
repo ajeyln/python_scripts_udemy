@@ -1,0 +1,63 @@
+If we want to join 3 tables albums,songs,artists
+sqlite> select artists.name,albums.name,songs.track,songs.title from songs
+   ...> inner join albums on songs.album = albums._id
+   ...> inner join artists on albums.artist = artists._id
+   ...> order by artists.name,albums.name,songs.track,songs.track;
+
+Creating a new table with joining 3 tables albums,songs,artists 
+sqlite> create view artist_list as
+   ...>  select artists.name,albums.name,songs.track,songs.title from songs
+   ...>  inner join albums on songs.album = albums._id
+   ...>  inner join artists on albums.artist = artists._id
+   ...> order by artists.name,albums.name,songs.track;
+
+Mini challenge
+1. Select the titles of all songs on the album "Forbidden"
+sqlite>select songs.title from songswhere albums.name = "forbidden" join albums on songs.album = albums._id;
+
+2. Repeat the previous query but this timedisplay the songs in track order. you may want to include the track number in the output to verify that it worked ok.
+sqlite> select songs.track,songs.title from songs join albums on songs.album = albums._id where albums.name = "Forbidden" order by songs.track;
+
+3. Display all songs for the band "Deep Purple"
+sqlite> select songs.title from songs inner join albums on songs.album = albums._id inner join artists on albums.artist= artists._id where artists.name = "Deep Purple";
+
+4. Rename the band "Mehitabel"to "One Kitten". Note that this is an exception to the advice to always fully qualify your column names. SET artists.name won't work, you 
+just need to specify name.
+sqlite> update artists set name = "One Kitten" where artists.name = "Mehitabel";
+
+5. check that the record was correctly renamed.
+sqlite> select * from artists where name = "One Kitten";
+3|One Kitten
+
+6. Select the titles of all the songs by Aerosmith in alphabetical order. Include only the title in the output.
+sqlite> select songs.title from songs
+   ...> inner join albums on songs.album=albums._id
+   ...> inner join artists on albums.artist=artists._id
+   ...> where artists.name = "Aerosmith" order by songs.title;
+
+7. Replace the column that you used in the previous answer with count(title) to get just a count of the number of songs.
+sqlite> select count(songs.title) from songs
+   ...> inner join albums on songs.album=albums._id
+   ...> inner join artists on albums.artist=artists._id
+   ...> where artists.name = "Aerosmith" ;
+
+8. Search the internet to find out how to get a list of the songs from step 6 without any duplicates.
+sqlite> select distinct songs.title from songs
+   ...> inner join albums on songs.album=albums._id
+   ...> inner join artists on albums.artist=artists._id
+   ...> where artists.name = "Aerosmith" order by songs.title;
+
+9. Search the internet again to find out how to get a count of the songs without duplicates.
+    Hint: It uses the same keyword as step 8 but the syntax may not be obvious.
+sqlite> select count(distinct songs.title) from songs
+   ...> inner join albums on songs.album=albums._id
+   ...> inner join artists on albums.artist=artists._id
+   ...> where artists.name = "Aerosmith" order by songs.title;
+
+10. Repeat the previous query to find the number of artists (which, obviously, should be one) and the number of albums.
+sqlite> select count(distinct albums.name) from albums
+   ...> inner join artists on albums.artist=artists._id
+   ...> where artists.name = "Aerosmith" order by songs.title;
+
+
+

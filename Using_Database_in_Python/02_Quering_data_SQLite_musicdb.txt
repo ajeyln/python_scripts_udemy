@@ -1,0 +1,35 @@
+to find the structure of the music.db database
+sqlite> .schema
+CREATE TABLE songs (_id INTEGER PRIMARY KEY, track INTEGER, title TEXT NOT NULL,
+ album INTEGER);
+CREATE TABLE albums (_id INTEGER PRIMARY KEY, name TEXT NOT NULL, artist INTEGER
+);
+CREATE TABLE artists (_id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+
+to find content in artists table in music.db database
+sqlite> select * from artists;
+
+to find content in albums table in music.db database
+sqlite> select * from albumss;
+
+to find content in songs table in music.db database
+sqlite> select * from songs;
+
+to display the content track  in songs table in numerical order
+sqlite> select * from songs order by track;
+
+if we want to order the content artist and name in albums table in order
+sqlite> select * from albums order by artist,name;
+
+If we want to join two tables songs and albums
+sqlite> select songs.track,songs.title,albums.name from songs join albums on songs.album=albums._id;
+
+If we want to display the content in jumbling order, we can use inner join method
+sqlite> select albums.name,songs.track,songs.title from songs inner join albums on songs.album = albums._id order by albums.name,songs.track;
+
+mini challenge
+Produce a list of all artists, with their albums, in alphabetical order of artist name
+sqlite> select artists.name,albums.name from albums join artists on albums.artist = artists._id order by artists.name;
+
+
+
