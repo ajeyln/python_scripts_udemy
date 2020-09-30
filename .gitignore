@@ -1,0 +1,14 @@
+.git
+.idea
+*.imi
+Dummy
+Testing.py
+Sample_Files_Python
+Scripts_W3_School
+*.xml
+# Default ignored files
+/shelf/
+/workspace.xml
+# Default ignored files
+/shelf/
+/workspace.xml
